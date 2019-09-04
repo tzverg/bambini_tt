@@ -1,0 +1,8 @@
+# Unity generated #
+Temp/
+Library/
+Bin/
+Packages/
+obj/
+# Visual Studio generated #
+.vs/

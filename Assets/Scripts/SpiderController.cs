@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class SpiderController : MotionController
 {
@@ -11,12 +12,6 @@ public class SpiderController : MotionController
     private float randomDistance;
     private float curOffsetFromPlayer;
     private bool finishMotion = true;
-
-    // Update is called once per frame
-    void Update()
-    {
-        Move();
-    }
 
     protected override void Move()
     {
@@ -41,15 +36,15 @@ public class SpiderController : MotionController
 
     private float GetCurrentOffset()
     {
-        var randomSeed = Random.Range(0F, 1F);
+        var randomSeed = UnityEngine.Random.Range(0F, 1F);
 
-        if (randomSeed > 0.5F)
+        if (randomSeed > 0.3F)
         {
             return 0.01F;
         }
         else
         {
-            return Random.Range(3F, maxOffsetFromPlayer);
+            return UnityEngine.Random.Range(3F, maxOffsetFromPlayer);
         }
     }
 
@@ -60,16 +55,14 @@ public class SpiderController : MotionController
 
     private void MoveOnRandomDirection()
     {
-        if (finishMotion == true)
+        if (finishMotion)
         {
             nextPosition = transform.position;
 
-            nextPosition.x = Random.Range(-offsetFreeMotion, offsetFreeMotion);
-            nextPosition.y = Random.Range(-offsetFreeMotion, offsetFreeMotion);
+            nextPosition.x = UnityEngine.Random.Range(-offsetFreeMotion, offsetFreeMotion);
+            nextPosition.y = UnityEngine.Random.Range(-offsetFreeMotion, offsetFreeMotion);
 
             BoundaryClamp(ref nextPosition);
-
-            Debug.Log("nextPosition: " + nextPosition.ToString());
 
             finishMotion = false;
         }
@@ -80,7 +73,5 @@ public class SpiderController : MotionController
         {
             finishMotion = true;
         }
-
-        Debug.Log("Distance: " + Vector3.Distance(transform.position, nextPosition));
     }
 }

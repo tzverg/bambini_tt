@@ -2,12 +2,6 @@
 
 public class ProjectileController : MotionController
 {
-    // Update is called once per frame
-    void Update()
-    {
-        Move();
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Destroy(collision.gameObject);

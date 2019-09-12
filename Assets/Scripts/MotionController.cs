@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 
-public class MotionController : MonoBehaviour
+public abstract class MotionController : MonoBehaviour
 {
     [SerializeField] protected float maxSpeed;
 
-    protected virtual void Move() {}
-    
+    protected virtual void Move() { }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Move();
+    }
+
     protected void BoundaryClamp(ref Vector3 targetPos)
     {
         float clampValue = Camera.main.orthographicSize;

@@ -9,8 +9,6 @@ public class PlayerController : MotionController
     // Update is called once per frame
     void Update()
     {
-        Move();
-
         if (Input.GetButtonDown("Fire1"))
         {
             Fire();

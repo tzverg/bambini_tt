@@ -17,6 +17,9 @@ TextureImporter:
   - first:
       213: 6518420998418912517
     second: SpiderS
+  - first:
+      213: 5855566188214163882
+    second: StoneS
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -232,6 +235,27 @@ TextureImporter:
       bones: []
       spriteID: 2fe62189bc3439c4fb36b2b2c3be871f
       internalID: 6518420998418912517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StoneS
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 535
+        width: 43
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 228e6b96a5e9de84482e142c0aad3cbe
+      internalID: 5855566188214163882
       vertices: []
       indices: 
       edges: []

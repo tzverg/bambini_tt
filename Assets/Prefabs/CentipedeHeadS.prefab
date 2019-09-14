@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5942966403641613302}
   m_Layer: 0
   m_Name: CentipedeHeadS
-  m_TagString: Untagged
+  m_TagString: CentipedeHead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,8 +27,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5942966403641613299}
-  m_LocalRotation: {x: -0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 9, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.2603493, y: 9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,7 +98,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -142,5 +142,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d11ad2f1c0d6d4ea77845f5d2b38ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 7
-  CentipedeLenght: 0
+  maxSpeed: 0.5
+  motionStepY: {x: 0, y: -1, z: 0}
+  centipedeLenght: 1
+  bodyOffset: 0.5
+  centipedeBodyGO: {fileID: 1077736974462207063, guid: 2e7c169ccfae84f4585954770a398030,
+    type: 3}
+  centipedeHeadGO: {fileID: 5942966403641613299}
+  centipedeBody:
+  - {fileID: 0}

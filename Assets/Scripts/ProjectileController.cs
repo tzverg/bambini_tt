@@ -4,8 +4,13 @@ public class ProjectileController : MotionController
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(collision.gameObject);
+        //Debug.Log("Collision " + gameObject.name + " with " + collision.gameObject.name);
         Destroy(gameObject);
+
+        if (!collision.gameObject.CompareTag("CentipedeHead"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
 
     override protected void Move()

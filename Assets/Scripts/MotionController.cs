@@ -2,7 +2,7 @@
 
 public abstract class MotionController : MonoBehaviour
 {
-    [SerializeField] protected float maxSpeed;
+    [SerializeField] public float maxSpeed;
 
     protected virtual void Move() { }
 
@@ -15,9 +15,8 @@ public abstract class MotionController : MonoBehaviour
     protected void BoundaryClamp(ref Vector3 targetPos)
     {
         float clampValue = Camera.main.orthographicSize;
-        float offsetY = 0.5F;
 
         targetPos.x = Mathf.Clamp(targetPos.x, -clampValue, clampValue);
-        targetPos.y = Mathf.Clamp(targetPos.y, -clampValue + offsetY, clampValue - offsetY);
+        targetPos.y = Mathf.Clamp(targetPos.y, -clampValue + 1, clampValue - 1);
     }
 }

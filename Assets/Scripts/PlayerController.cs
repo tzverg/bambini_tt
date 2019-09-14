@@ -2,13 +2,18 @@
 
 public class PlayerController : MotionController
 {
-    [SerializeField] private float projectileOffset;
-
     [SerializeField] private GameObject projectileGO;
 
-    // Update is called once per frame
+    [SerializeField] private float projectileOffset;
+    [SerializeField] private float slowSpeed;
+
+    private bool onTriggerStone = false;
+    private float currentSpeed;
+
     void Update()
     {
+        Move();
+
         if (Input.GetButtonDown("Fire1"))
         {
             Fire();
@@ -17,7 +22,20 @@ public class PlayerController : MotionController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        if (collision.gameObject.tag != "StonePart")
+        {
+            Destroy(gameObject);
+            Debug.Log("player destroyed");
+        }
+        else
+        {
+            onTriggerStone = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        onTriggerStone = false;
     }
 
     private void Fire()
@@ -31,8 +49,15 @@ public class PlayerController : MotionController
     {
         Vector3 pos = transform.position;
 
-        pos.x += Input.GetAxis("Horizontal") * maxSpeed * Time.deltaTime;
-        pos.y += Input.GetAxis("Vertical") * maxSpeed * Time.deltaTime;
+        currentSpeed = maxSpeed;
+
+        if (onTriggerStone)
+        {
+            currentSpeed = slowSpeed;
+        }
+
+        pos.x += Input.GetAxis("Horizontal") * currentSpeed * Time.deltaTime;
+        pos.y += Input.GetAxis("Vertical") * currentSpeed * Time.deltaTime;
 
         BoundaryClamp(ref pos);
 

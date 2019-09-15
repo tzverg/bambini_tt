@@ -34,13 +34,6 @@ public class CentipedeC : MotionController
         }
         else if (collision.gameObject.CompareTag("StonePart"))
         {
-            //Vector3 targetPos = transform.position;
-            //directionBottom = true;
-            //BoundaryClamp(ref targetPos);
-            //transform.position = targetPos;
-            //VerticalPos = targetPos + motionStepY;
-            //RotateHead();
-
             ChangeDirection(true);
         }
     }
@@ -55,33 +48,36 @@ public class CentipedeC : MotionController
     {
         if (bodyPartID < centipedeBody.Count)
         {
-            CentipedeC newHead = centipedeHeadGO.GetComponent<CentipedeC>();
-            newHead.transform.position = centipedeBody[bodyPartID].transform.position;
-            RemoveBodyPart(bodyPartID);
-
-            SetParams(ref newHead, bodyPartID);
-
-            for (int cnt = 0; cnt < newHead.centipedeLenght; cnt++)
+            GameObject newHeadGO = Instantiate(centipedeHeadGO, centipedeBody[bodyPartID].transform.position, transform.rotation);
+            CentipedeC newHead = newHeadGO.GetComponent<CentipedeC>();
+            if (newHead != null)
             {
-                CentipedeBodyC targetCentipedBody = centipedeBody[bodyPartID + cnt].GetComponent<CentipedeBodyC>();
-                if (targetCentipedBody != null)
+                RemoveBodyPart(bodyPartID);
+
+                SetParams(ref newHead, bodyPartID);
+
+                for (int cnt = 0; cnt < newHead.centipedeLenght; cnt++)
                 {
-                    newHead.centipedeBody.Add(centipedeBody[bodyPartID + cnt]);
-                    targetCentipedBody.head = newHead;
-                    targetCentipedBody.bodyID = cnt;
+                    CentipedeBodyC targetCentipedBody = centipedeBody[bodyPartID + cnt].GetComponent<CentipedeBodyC>();
+                    if (targetCentipedBody != null)
+                    {
+                        newHead.centipedeBody.Add(centipedeBody[bodyPartID + cnt]);
+                        targetCentipedBody.head = newHead;
+                        targetCentipedBody.bodyID = cnt;
+                    }
                 }
+
+                centipedeBody.RemoveRange(bodyPartID, newHead.centipedeLenght);
+
+                centipedeLenght = centipedeBody.Count;
+                newHead.ChangeDirection(true);
             }
-
-            centipedeBody.RemoveRange(bodyPartID, newHead.centipedeLenght);
-
-            centipedeLenght = centipedeBody.Count;
-
-            Instantiate(newHead).ChangeDirection(true);
         }
     }
 
     private void SetParams(ref CentipedeC newHead, int bodyPartID)
     {
+        newHead.directionLeft = directionLeft;
         newHead.maxSpeed = maxSpeed;
         newHead.bodyOffset = bodyOffset;
         newHead.motionStepY = motionStepY;
@@ -94,7 +90,6 @@ public class CentipedeC : MotionController
 
     private void ChangeDirection(bool toBottom)
     {
-        Debug.Log("ChangeDirection of " + this.name);
         Vector3 targetPos = transform.position;
         transform.position = targetPos;
 
@@ -198,6 +193,7 @@ public class CentipedeC : MotionController
         {
             Vector3 nextPos = GetBPNextPosition(cnt);
             Vector3 pos = centipedeBody[cnt].transform.position;
+            Vector3 direction = nextPos - pos;
 
             pos = Vector3.MoveTowards(pos, nextPos, (maxSpeed + 0.1F) * Time.deltaTime);
 
@@ -205,6 +201,8 @@ public class CentipedeC : MotionController
             {
                 centipedeBody[cnt].transform.position = pos;
             }
+
+            centipedeBody[cnt].transform.up = direction;
         }
     }
 }

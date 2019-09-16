@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SpiderController : MotionController
+public class SpiderC : MotionController
 {
     [SerializeField] private float maxOffsetFromPlayer;
     [SerializeField] private float offsetFreeMotion;
@@ -12,6 +11,17 @@ public class SpiderController : MotionController
     private float randomDistance;
     private float curOffsetFromPlayer;
     private bool finishMotion = true;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("StonePart"))
+        {
+            if (Random.Range(0F, 1F) > 0.5F)
+            {
+                Destroy(collision.gameObject);
+            }
+        }
+    }
 
     protected override void Move()
     {
@@ -36,7 +46,7 @@ public class SpiderController : MotionController
 
     private float GetCurrentOffset()
     {
-        var randomSeed = UnityEngine.Random.Range(0F, 1F);
+        var randomSeed = Random.Range(0F, 1F);
 
         if (randomSeed > 0.3F)
         {
@@ -44,7 +54,7 @@ public class SpiderController : MotionController
         }
         else
         {
-            return UnityEngine.Random.Range(3F, maxOffsetFromPlayer);
+            return Random.Range(3F, maxOffsetFromPlayer);
         }
     }
 
@@ -59,8 +69,8 @@ public class SpiderController : MotionController
         {
             nextPosition = transform.position;
 
-            nextPosition.x = UnityEngine.Random.Range(-offsetFreeMotion, offsetFreeMotion);
-            nextPosition.y = UnityEngine.Random.Range(-offsetFreeMotion, offsetFreeMotion);
+            nextPosition.x = Random.Range(-offsetFreeMotion, offsetFreeMotion);
+            nextPosition.y = Random.Range(-offsetFreeMotion, offsetFreeMotion);
 
             BoundaryClamp(ref nextPosition);
 

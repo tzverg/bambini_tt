@@ -90,19 +90,14 @@ public class CentipedeC : MotionController
 
     private void ChangeDirection(bool toBottom)
     {
-        Vector3 targetPos = transform.position;
-        transform.position = targetPos;
-
         directionBottom = toBottom;
 
         if (directionBottom)
         {
-            BoundaryClamp(ref targetPos);
             VerticalPos = transform.position + motionStepY;
         }
         else
         {
-            transform.position = VerticalPos;
             directionLeft = !directionLeft;
         }
 
@@ -136,6 +131,7 @@ public class CentipedeC : MotionController
         {
             if ((targetPos.x <= -maxValue) || (targetPos.x >= maxValue))
             {
+                BoundaryClamp(ref targetPos);
                 ChangeDirection(true);
             }
         }
@@ -143,6 +139,7 @@ public class CentipedeC : MotionController
         {
             if ((targetPos.y <= VerticalPos.y))
             {
+                targetPos = VerticalPos;
                 ChangeDirection(false);
             }
         }

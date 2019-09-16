@@ -6,6 +6,9 @@ public class StoneC : MonoBehaviour
     private const float maxPosOffset = 0.2F;
     private List<Transform> childrenTRL;
 
+    public int mapIDX;
+    public int mapIDY;
+
     void Start()
     {
         childrenTRL = new List<Transform>();

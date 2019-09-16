@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerController : MotionController
 {
@@ -6,17 +7,23 @@ public class PlayerController : MotionController
 
     [SerializeField] private float projectileOffset;
     [SerializeField] private float slowSpeed;
+    [SerializeField] private float shootingSpeed;
 
     private bool onTriggerStone = false;
+    private bool gunReload = false;
     private float currentSpeed;
 
     void Update()
     {
         Move();
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
-            Fire();
+            if (!gunReload)
+            {
+                gunReload = true;
+                StartCoroutine(FireAndWait());
+            }
         }
     }
 
@@ -36,6 +43,13 @@ public class PlayerController : MotionController
     private void OnTriggerExit2D(Collider2D other)
     {
         onTriggerStone = false;
+    }
+
+    IEnumerator FireAndWait()
+    {
+        Fire();
+        yield return new WaitForSeconds(shootingSpeed);
+        gunReload = false;
     }
 
     private void Fire()

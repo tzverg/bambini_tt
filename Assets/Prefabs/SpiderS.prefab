@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 951332f9968813445b9ee625cc73facd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 4
+  maxSpeed: 6
   maxOffsetFromPlayer: 0
   offsetFreeMotion: 4
   playerTR: {fileID: 0}

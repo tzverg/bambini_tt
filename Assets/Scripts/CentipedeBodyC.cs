@@ -11,6 +11,7 @@ public class CentipedeBodyC : MonoBehaviour
         {
             head.centipedeBody.Remove(gameObject);
             head.HitProjectileOn(bodyID);
+            UIController.AddSoresNum(30);
         }
     }
 }

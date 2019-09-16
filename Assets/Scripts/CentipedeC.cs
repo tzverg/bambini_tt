@@ -27,10 +27,8 @@ public class CentipedeC : MotionController
                 gameObject.transform.position = centipedeBody[0].transform.position;
                 RemoveBodyPart(0);
             }
-            else
-            {
-                Destroy(gameObject);
-            }
+
+            UIController.AddSoresNum(50);
         }
         else if (collision.gameObject.CompareTag("StonePart"))
         {
@@ -42,6 +40,15 @@ public class CentipedeC : MotionController
     {
         Destroy(centipedeBody[bodyPartID]);
         centipedeBody.Remove(centipedeBody[bodyPartID]);
+
+        foreach (GameObject target in centipedeBody)
+        {
+            CentipedeBodyC targetCentipedBody = target.GetComponent<CentipedeBodyC>();
+            if (targetCentipedBody != null)
+            {
+                targetCentipedBody.bodyID = centipedeBody.IndexOf(target);
+            }
+        }
     }
 
     public void HitProjectileOn(int bodyPartID)
@@ -71,6 +78,8 @@ public class CentipedeC : MotionController
 
                 centipedeLenght = centipedeBody.Count;
                 newHead.ChangeDirection(true);
+
+                GameC.enemyList.Add(newHead.gameObject);
             }
         }
     }
@@ -141,6 +150,11 @@ public class CentipedeC : MotionController
             {
                 targetPos = VerticalPos;
                 ChangeDirection(false);
+            }
+
+            if (targetPos.y < -maxValue)
+            {
+                UIController.gameOver = true;
             }
         }
     }

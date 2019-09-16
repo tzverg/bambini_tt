@@ -21,6 +21,10 @@ public class SpiderC : MotionController
                 Destroy(collision.gameObject);
             }
         }
+        else if (collision.gameObject.CompareTag("Projectile"))
+        {
+            UIController.AddSoresNum(100);
+        }
     }
 
     protected override void Move()

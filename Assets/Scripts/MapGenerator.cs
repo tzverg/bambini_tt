@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameC.enemyList = new List<GameObject>();
+
         CreateSpider();
         CreateCentipede();
 
@@ -26,6 +29,7 @@ public class MapGenerator : MonoBehaviour
     private void CreateSpider()
     {
         SpiderC spiderC = Instantiate(spiderGO).GetComponent<SpiderC>();
+        GameC.enemyList.Add(spiderC.gameObject);
     }
 
     private void CreateCentipede()
@@ -51,6 +55,8 @@ public class MapGenerator : MonoBehaviour
                 bodySection.transform.position = centipedeHead.transform.position + posOffset * (cnt + 1);
                 centipedeHead.centipedeBody.Add(bodySection);
             }
+
+            GameC.enemyList.Add(centipedeHead.gameObject);
         }
     }
 

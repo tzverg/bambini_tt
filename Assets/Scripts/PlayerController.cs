@@ -13,6 +13,10 @@ public class PlayerController : MotionController
     private bool gunReload = false;
     private float currentSpeed;
 
+#if UNITY_ANDROID
+    private Vector2 touchDirection;
+#endif
+
     void Update()
     {
         Move();
@@ -33,6 +37,7 @@ public class PlayerController : MotionController
         {
             Destroy(gameObject);
             Debug.Log("player destroyed");
+            UIController.gameOver = true;
         }
         else
         {
@@ -70,8 +75,18 @@ public class PlayerController : MotionController
             currentSpeed = slowSpeed;
         }
 
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
         pos.x += Input.GetAxis("Horizontal") * currentSpeed * Time.deltaTime;
         pos.y += Input.GetAxis("Vertical") * currentSpeed * Time.deltaTime;
+#endif
+#if UNITY_ANDROID
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        {
+            touchDirection = Input.GetTouch(0).deltaPosition.normalized;
+            pos.x += touchDirection.x * currentSpeed * Time.deltaTime;
+            pos.y += touchDirection.y * currentSpeed * Time.deltaTime;
+        }
+#endif
 
         BoundaryClamp(ref pos);
 

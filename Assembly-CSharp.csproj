@@ -64,12 +64,14 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CentipedeBodyC.cs" />
     <Compile Include="Assets\Scripts\CentipedeC.cs" />
+    <Compile Include="Assets\Scripts\GameC.cs" />
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\MotionController.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ProjectileController.cs" />
     <Compile Include="Assets\Scripts\SpiderC.cs" />
     <Compile Include="Assets\Scripts\StoneC.cs" />
+    <Compile Include="Assets\Scripts\UIController.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/work/unity/bambini_test_task/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

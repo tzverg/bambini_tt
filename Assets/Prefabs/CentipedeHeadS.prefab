@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d11ad2f1c0d6d4ea77845f5d2b38ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
+  maxSpeed: 7
   motionStepY: {x: 0, y: -1, z: 0}
   centipedeLenght: 3
   bodyOffset: 0.5
